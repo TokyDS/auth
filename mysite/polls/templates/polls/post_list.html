@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        {% for post in post_list %}
+            <a href="{% url 'post_detail' post.id%}">
+                <h1>
+                    {{ post.title }}
+                </h1>
+            </a>
+            <!-- Несуперюзер не увидит шняги в этом if. Только то, что снаружи-->
+            {% if request.user.is_authenticated and request.user.is_superuser %}
+
+            <p>
+                {{ post.author }}
+            </p>
+
+            <p>
+                {{ post.text }}
+            </p>
+            {% endif %}
+
+        {% endfor%}
+
+<a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>
